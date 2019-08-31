@@ -1,20 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+
+import Body from './components/body/Body.js';
+import Header from './components/header/Header.js';
 
 function App() {
   return (
-    <div className="global">
-
-      <div className="global--header">
-        <p>IAS SYSTEM</p>
-      </div>
-
-      <div className="global--body">
-        <p>SIMULATION</p>
-      </div>
-      
-    </div>
+    <>
+      <Header/>
+      <Body/>
+    </>
   );
 }
 

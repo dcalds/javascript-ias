@@ -1,0 +1,8 @@
+.body {
+    display: flex;
+    height: 580px;
+    justify-content: center;
+    align-items: center;
+    background-color:rgb(55, 53, 207);
+    color: aliceblue
+}
