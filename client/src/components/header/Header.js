@@ -4,7 +4,7 @@ import './Styles.css';
 function Header(){
     return(
         <div className="header">
-            IAS SYSTEM
+            IAS COMPUTER
         </div>
     );
 }

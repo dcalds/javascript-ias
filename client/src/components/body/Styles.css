@@ -1,9 +1,40 @@
 .body {
     display: flex;
     flex-direction: column;
-    height: 580px;
     justify-content: center;
     align-items: center;
+    height: 85vh;
     background-color:rgb(55, 53, 207);
     color: aliceblue
+}
+
+.generator {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 50px;    
+    width: 50%;
+}
+
+.button {    
+    background-color:rgb(255, 145, 0);
+    border: none;
+    color: aliceblue;
+    padding: 15px 48px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px
+}
+
+.instrucao {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 150px;
+    width: 50%;
+    background-color:rgb(38, 36, 128);
+    border-radius: 8px;
 }
