@@ -5,7 +5,7 @@ function Body() {
 
     // Hook que controla o estado da Seed
     const [seed, setSeed] = useState([0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,])
-
+    const [seedStack, setSeedStack] = useState([])
 
     const [mbr, setMbr] = useState(0)
     const [mar, setMar] = useState(0)
@@ -21,7 +21,9 @@ function Body() {
             newSeed.push(Math.floor(Math.random() * 2))
         }
         setSeed(newSeed)
+        setSeedStack([...seedStack, newSeed])
     }
+
 
     return (
         <div className="body">
@@ -55,6 +57,19 @@ function Body() {
                     <p> Endereço de Memória: {seed.indexOf(1) != -1? seed.slice(28, 39) : "ENDEREÇO DR"}</p>
 
                 </div>
+            </div>
+
+            <div className="seed-stack">
+                <ol>
+                    {
+                    seedStack != [] ? 
+                    
+                    seedStack.map( (element, index) => <li key={index}> {element} </li> ) 
+                    
+                    : <p>Lista de SEEDS</p>
+                    }
+
+                </ol>
             </div>
 
         </div>
