@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Styles.css';
 
 function Body() {
@@ -12,6 +12,18 @@ function Body() {
     const [ir, setIr] = useState(0)
     const [ibr, setIbr] = useState(0)
     const [pc, setPc] = useState(0)
+
+    // Iniciar  primeiro cliclo de busca
+    const inicio = () =>{
+        while (ir !== [0,0,0,0,0,0,0,0] ) {
+            if ( ibr.length > 1 ) {
+                // instrução
+            }
+            else {
+                // instrução
+            }
+        }
+    }
 
 
     // Função que gera uma seed aleatória
