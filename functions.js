@@ -1,35 +1,35 @@
+// Memória Principal
+memoriaPrincipal = []
+// Unidade de Controle
+// Unidade Lógica e Aritimética
+// Entrada/Saída
+
+// Gera uma palavra de 40 bits
 function gerarPalavra () {
     palavra = []
-    for (let i = 0; i <= 39; i++){
+    for (let index = 0; index <= 39; index++) {
         palavra.push(Math.floor(Math.random() * 2))
     }
-    return palavra
+    return palavra.toString()
 }
 
-ir = []
-ibr = []
-mar = null
-mbr = null
-pc = 0
+// Popula a memória com objetos possuindo id e uma palavra
+function popularMemoria (memoria) {
+    for (let i = 0; i <= 39; i++) {
+        memoria.push( {id: i, palavra: gerarPalavra()} )
+    }
+}
 
+popularMemoria(memoriaPrincipal)
 
-nova = gerarPalavra()
-
-mar = nova.slice(1,8)
-
-console.log(mar)
+console.log(memoriaPrincipal)
 
 // Iniciar  primeiro cliclo de busca
-function cicloDeBusca () {
+function cicloDeBusca() {
+    console.log("Ciclo de busca")
+}
 
-    gerarPalavra()
-
-    while (ir != [0,0,0,0,0,0,0,0] ) {
-        if ( ibr.length > 1 ) {
-            console.log("Executou")
-        }
-        else {
-            console.log("Não executou")
-        }
-    }
+// Iniciar  primeiro cliclo de busca
+function cicloDeExecucao() {
+    console.log("Ciclo de Execução")
 }
