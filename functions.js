@@ -13,11 +13,17 @@ memoriaPrincipal = {
 }
 
 // Unidade de Controle
+PC = 0
+MAR = null
+IR = '00000001'
+IBR = null
 
 // Unidade Lógica e Aritimética
+MBR = null
+AC = null
+MQ = null
 
-// Entrada/Saída
-
+// -------------------------------------------- //
 
 // Gera uma palavra de 40 bits no formato string
 function gerarPalavra() {
@@ -29,22 +35,21 @@ function gerarPalavra() {
     return palavra
 }
 
-// Popula a memória com objetos possuindo id e uma palavra
+// Atualiza a memória com objetos por meio de um id e uma palavra
 function atualizarPalavra(memoria, posicao, novoValor) {
-
     for (let index = 0; index < Object.keys(memoria).length; index++) {
         if (Object.keys(memoria)[index] == posicao ) {
             memoria[posicao] = novoValor
+            return memoria
+            break
         }
     }
-    return memoria
 }
 
+
 // Iniciar  primeiro cliclo de busca
-function cicloDeBusca() {
-    while (true) {
-        console.log("Ciclo de Busca")
-    }
+while (IR != '00000000') {
+    console.log("Ciclo de Busca")
 }
 
 // Iniciar  primeiro cliclo de busca
