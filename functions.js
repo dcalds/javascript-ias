@@ -15,13 +15,38 @@ memoriaPrincipal = {
 // Unidade de Controle
 PC = 0
 MAR = null
-IR = '00000001'
-IBR = null
+IR = '00000000'
+IBR = '00000001'
 
 // Unidade Lógica e Aritimética
 MBR = null
 AC = null
 MQ = null
+
+// -------------------------------------------- //
+
+contadorDeCiclos=0
+
+// Iniciar  primeiro cliclo de busca
+while (IR != '00000000') {
+
+    // Caso eu tenha uma instrução na direita
+    if (IBR != '00000000') {
+        IR = IBR.slice(0, 8)
+        MAR = IBR.slice(9, 20)
+        PC+=1
+        console.log(IR)
+        console.log("Intrução da Esquerda")
+    }
+
+    // Pega a instrução da direita
+    else {
+        console.log("Intrução da Direita")
+    }
+
+    console.log("Ciclo de Busca", contadorDeCiclos)
+    contadorDeCiclos+=1
+}
 
 // -------------------------------------------- //
 
@@ -46,15 +71,5 @@ function atualizarPalavra(memoria, posicao, novoValor) {
     }
 }
 
-
-// Iniciar  primeiro cliclo de busca
-while (IR != '00000000') {
-    console.log("Ciclo de Busca")
-}
-
-// Iniciar  primeiro cliclo de busca
-function cicloDeExecucao() {
-    while (true) {
-        console.log("Ciclo de Execução")
-    }
-}
+// Converter pra binário
+return console.log(parseInt('01101', 2))
