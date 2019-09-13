@@ -70,6 +70,18 @@ function atualizarPalavra(memoria, posicao, novoValor) {
         }
     }
 }
+a = '0000000000000000000000000000000000000011'
+b = '0000000000000000000000000000000000000101'
+
+const binDec = (bin) => { return parseInt(bin, 2) }
+
+const decBin = (dec) => { return parseInt(dec, 10) }
+
+sum = binDec(a) + binDec(b)
+final = decBin(sum)
 
 // Converter pra binário
-return console.log(parseInt('01101', 2))
+console.log(binDec(''))
+console.log(decBin(''))
+
+// console.log(gerarPalavra().slice(1,40).length)
