@@ -1,22 +1,22 @@
 // Conversões
 const binDec = (bin) => { return parseInt(bin, 2) } // Converte um número binário em decimal
-const decBin = (dec) => { return parseInt(dec, 10) } // Converte um número decimal em binário
+const decBin = (dec) => { return parseInt(parseInt(dec).toString(2)) } // Converte um número decimal em binário
 
 // Memória Principal
 M = {
-    0: '0000000100000000101000000001000000001011',
-    1: '0000001000000000101000000010000000001011',
-    2: '0000001100000000101000000011000000001011',
-    3: '0000010000000000101000000100000000001011',
-    4: '0000100100000000101000001010000000000000',
-    5: '0010000100000000110000000000000000000000',
-    6: '0000000000000000000000000000000000000000',
-    7: '0000000000000000000000000000000000000000',
-    8: '0000000000000000000000000000000000000000',
-    9: '0000000000000000000000000000000000000000',
-    10: '0000000000000000000000000000000000000000',
-    11: '0000000000000000000000000000000000000001',
-    12: '1000000000000000000000000000000000000001'
+    0: '0000000100000000101000000001000000001011',  // 0 load M(10)    load M(11)
+    1: '0000001000000000101000000010000000001011',  // 1 load -M(10)   load -M(11)
+    2: '0000001100000000101000000011000000001011',  // 2 load |M(10)| |load M(11)|
+    3: '0000010000000000101000000100000000001011',  // 3 load |M(10)| |load M(11)|
+    4: '0000100100000000101000001010000000000000',  // 4 load MQ,M(10) load MQ
+    5: '0010000100000000110000000000000000000000',  // 5 load M(12),AC
+    6: '0000000000000000000000000000000000000000',  // 6
+    7: '0000000000000000000000000000000000000000',  // 7
+    8: '0000000000000000000000000000000000000000',  // 8
+    9: '0000000000000000000000000000000000000000',  // 9
+    10: '0000000000000000000000000000000000000000', // 10
+    11: '0000000000000000000000000000000000000001', // 11
+    12: '1000000000000000000000000000000000000001', // 12
 }
 
 // Unidade de Controle
@@ -36,6 +36,8 @@ contadorDeCiclos = 1
 
 while (IR != '00000000') {
 
+    console.log(`// ------------ Ciclo: ${contadorDeCiclos} ------------ //`)
+
     // Ciclo de Busca
     if (IBR.length > 1) {
 
@@ -44,7 +46,7 @@ while (IR != '00000000') {
         PC += 1
         IBR = '0'
 
-        console.log("IF - 1 CASO")
+        console.log("DIREITA >>>")
     }
 
     else {
@@ -52,13 +54,11 @@ while (IR != '00000000') {
         MAR = PC
         MBR = M[MAR]
 
-        console.log(PC)
-
         IR = MBR.slice(0, 8)
         MAR = MBR.slice(8, 20)
         IBR = MBR.slice(20, 40)
 
-        console.log("ELSE - 2 CASO")
+        console.log("ESQUERDA <<<")
     }
 
     // Ciclo de Execução
@@ -66,7 +66,7 @@ while (IR != '00000000') {
         // Transferência de Dados ---------------------------------------------------------- //
 
     if (IR === '00001010') {
-        AC = MQ
+        AC = MQ        
         console.log("LOAD MQ") // 1
     }
 
@@ -81,20 +81,24 @@ while (IR != '00000000') {
     }
 
     if (IR === '00000001') {
-        AC = M[MAR]
+        
+        AC = M[binDec(MAR)]
         console.log("LOAD M[X]") // 4
     }
     if (IR === '00000010') {
-        AC = -M[MAR]
+        
+        ACpos = M[binDec(MAR)]
+        AC = '1' + ACpos.slice(1,40)
         console.log("LOAD -M[X]") // 5
     }
     if (IR === '00000011') {
-
+        AC = M[binDec(MAR)]
         console.log("LOAD |M[X]|") // 6
     }
 
     if (IR === '00000100') {
-
+        ACpos = M[binDec(MAR)]
+        AC = '1' + ACpos.slice(1,40)
         console.log("LOAD -|M[X]|") // 7
     }
 
@@ -176,11 +180,13 @@ while (IR != '00000000') {
         console.log("STOR M[X, 28:39]") // 21
     }
 
-    console.log("Ciclo de Busca", contadorDeCiclos)
     contadorDeCiclos += 1
 }
 
 // -------------------------------------------- //
+
+console.log("// ------------ MEMÓRIA PRINCIPAL ------------ //")
+console.log(M)
 
 // Gera uma palavra de 40 bits no formato string
 function gerarPalavra() {
