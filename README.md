@@ -24,7 +24,5 @@ Esta unidade é responsável por realizar operações lógicas e aritméticas no
 
 - MBR: Armazena temporariamente dados que foram lidos ou que serão escritos na memória. Para se escrever um dado na memória, este deve estar presente no MBR e o seu respectivo endereço de memória no MAR e, por fim, enviar os sinais de controle para a memória realizar  as operações de escrita.
 
-- AC & MQ: Armazenam temporariamente operandos e resultados de operações lógicas e aritméticas. 
-
-### Entrada e Saída de Dados (E/S)
+- AC & MQ: Armazenam temporariamente operandos e resultados de operações lógicas e aritméticas.
 

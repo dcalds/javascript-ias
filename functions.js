@@ -67,46 +67,60 @@ while (IR != '00000000') { // Enquanto as instruções não forem 00000000 (Fim 
 
         // Transferência de Dados ---------------------------------------------------------- //
 
-    if (IR === '00001010') {
+    if (IR === '00001010') { // Transfere o conteúdo de MQ para AC 
+        
         AC = MQ
+
         console.log("LOAD MQ") // 1
         console.log("AC :", AC)        
     }
 
-    if (IR === '00001001') {
+    if (IR === '00001001') { // Transfere o conteúdo do local de memória X para MQ
+        
         MQ = M[binDec(MAR)]
+
         console.log(`LOAD MQ, M[${binDec(MAR)}]`) // 2 
         console.log("MQ :", MQ)        
     }
 
-    if (IR === '00100001') {
+    if (IR === '00100001') { // Transfere o conteúdo de AC para o local de memória X
+        
         M[binDec(MAR)] = AC
+
         console.log(`STOR M[${binDec(MAR)}]`) // 3
-        console.log("M[MAR] :", M[binDec(MAR)])
+        console.log(`M[${binDec(MAR)}]`, M[binDec(MAR)])
     }
 
-    if (IR === '00000001') {
+    if (IR === '00000001') { // Transfere o M(X) para AC
         
         AC = M[binDec(MAR)]
+
         console.log(`LOAD M[${binDec(MAR)}]`) // 4
         console.log("AC :", AC)        
     }
-    if (IR === '00000010') {
+
+    if (IR === '00000010') { // Transfere o -M(X) para AC
         
         ACpos = M[binDec(MAR)]
         AC = '1' + ACpos.slice(1,40)
+
         console.log(`LOAD -M[${binDec(MAR)}]`) // 5
         console.log("AC :", AC)        
     }
-    if (IR === '00000011') {
+
+    if (IR === '00000011') { // Transfere o valor absoluto de M(X) para o AC
+
         AC = M[binDec(MAR)]
+
         console.log(`LOAD |M[${binDec(MAR)}]|`) // 6
         console.log("AC :", AC)        
     }
 
-    if (IR === '00000100') {
+    if (IR === '00000100') { // Transfere -|M(X)| para o acumulador
+
         ACpos = M[binDec(MAR)]
         AC = '1' + ACpos.slice(1,40)
+
         console.log(`LOAD -|M[${binDec(MAR)}]|`) // 7
         console.log("AC :", AC)        
     }
@@ -115,10 +129,16 @@ while (IR != '00000000') { // Enquanto as instruções não forem 00000000 (Fim 
 
     if (IR === '00001101') {
 
+        temp = M[binDec(MAR)]
+        IBR = temp.slice(0,20)
+
         console.log("JUMP M[X, 0:19]") // 8
     }
 
     if (IR === '00001110') {
+
+        temp = M[binDec(MAR)]
+        IBR = temp.slice(20,40)
 
         console.log("JUMP M[X, 20:39]") // 9
     }
@@ -127,10 +147,24 @@ while (IR != '00000000') { // Enquanto as instruções não forem 00000000 (Fim 
 
     if (IR === '00001111') {
 
+        if (AC.slice(0,1) != 1) {
+            
+            temp = M[binDec(MAR)]
+            IBR = temp.slice(0,20)
+
+        }
+
         console.log("JUMP + M[X, 0:19]") // 10
     }
 
     if (IR === '00010000') {
+
+        if (AC.slice(0,1) != 1) {
+            
+            temp = M[binDec(MAR)]
+            IBR = temp.slice(20,40)
+
+        }
 
         console.log("JUMP + M[X, 20:39]") // 11
     }
@@ -139,20 +173,28 @@ while (IR != '00000000') { // Enquanto as instruções não forem 00000000 (Fim 
 
     if (IR === '00000101') {
 
+        AC = decBin( binDec(AC) + binDec(M[MAR]) )
+
         console.log("ADD M[X]") // 12
     }
 
     if (IR === '00000111') {
+
+        AC = decBin( binDec(AC) + Math.abs(binDec(M[MAR])) )
 
         console.log("ADD |M[X]|") // 13
     }
 
     if (IR === '00000110') {
 
+        AC = decBin( binDec(AC) - binDec(M[MAR]) )
+
         console.log("SUB M[X]") // 14
     }
 
     if (IR === '00001000') {
+
+        AC = decBin( binDec(AC) - Math.abs(binDec(M[MAR])) )
 
         console.log("SUB M|[X]|") // 15
     }
@@ -181,7 +223,6 @@ while (IR != '00000000') { // Enquanto as instruções não forem 00000000 (Fim 
 
     if (IR === '00010010') {
 
-        
         console.log("STOR M[X, 8:19]") // 20
     }
 
